@@ -20,14 +20,16 @@ A[GitHub] --> B[GitHub Actions]
 B --> C[Terraform]
 C --> D[GCP]
 D --> E[Cloud Storage]
-E --> F[BigQuery Bronze]
+E --> F[BigQuery Raw]
 F --> G[dbt]
-G --> H[Silver]
-H --> I[Gold]
-I --> J[Looker Studio]
-J --> K[Monitoring]
-K --> L[Alertes]
-L --> M[Documentation]
+G --> H[Staging]
+H --> I[Intermediate]
+I --> J[Fact]
+J --> K[Mart]
+K --> L[Looker Studio]
+L --> M[Monitoring]
+M --> N[Alertes]
+N --> O[Documentation]
 ```
 
 ## Planning
@@ -53,10 +55,6 @@ Models, sources, snapshots, seeds, tests, macros, packages, documentation, expos
 ### Semaine 4, partie entreprise
 
 CI/CD, GitHub Actions, environnements DEV et PROD, monitoring, optimisation des couts, performance BigQuery, observabilite, dashboard, documentation, deploiement final.
-
-## Format des publications LinkedIn
-
-Chaque publication suit la meme structure : jour du challenge, sujet du jour, probleme rencontre, pourquoi c est important en entreprise, comment il a ete resolu, resultat, capture ou schema, retour d experience incluant les erreurs.
 
 ## Stack technique
 
