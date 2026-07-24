@@ -216,3 +216,21 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# dbt
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+.dbt/
+
+# Terraform
+terraform/.terraform/
+terraform/*.tfstate
+terraform/*.tfstate.backup
+terraform/.terraform.lock.hcl
+*.tfvars
+
+# Secrets / credentials GCP
+credentials.json
+*.key.json
+*.env.local
