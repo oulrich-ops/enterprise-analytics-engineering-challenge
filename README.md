@@ -92,14 +92,6 @@ La transformation suit une architecture en couches, convention standard dbt :
 2. **Intermediate** (`int_`) — jointures et logique de transformation intermédiaire, non exposée aux utilisateurs finaux
 3. **Fact / Mart** (`fct_`, `dim_`, `mart_`) — modèles finaux orientés métier, consommés par Metabase
 
-## Roadmap — 30 jours
-
-- [x] **Semaine 1 — Fondations** : repo, architecture, Terraform, infra GCP, premier pipeline
-- [ ] **Semaine 2 — Ingestion** : CSV → Cloud Storage → BigQuery, partitionnement, clustering, ingestion incrémentale
-- [ ] **Semaine 3 — Transformation** : modèles dbt (staging, intermediate, marts), tests, snapshots, documentation, exposures
-- [ ] **Semaine 4 — Mise en production** : CI/CD, environnements dev/prod, monitoring, optimisation des coûts, dashboards Metabase
-
-Le détail jour par jour est publié sur LinkedIn (voir plus bas).
 
 ## Standards de qualité
 
