@@ -46,3 +46,15 @@ terraform apply
 python -m venv venv
 .\venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+
+## Résolution de problèmes courants
+
+### Erreur IAM : "Policy update access denied"
+Le compte de service Terraform a besoin du rôle de gestion IAM :
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+  --member="serviceAccount:terraform-runner@<PROJECT_ID>.iam.gserviceaccount.com" \
+  --role="roles/resourcemanager.projectIamAdmin"
+
+### Erreur de chargement CSV : "Missing close quote character"
+Ajouter le flag --allow_quoted_newlines=true à la commande bq load,
+et --max_bad_records=N si quelques lignes restent malformées.
