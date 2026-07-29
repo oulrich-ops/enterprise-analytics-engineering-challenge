@@ -1,0 +1,92 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: "One row per unique customer. Deduplicated from raw customer records, since Olist creates a new customer_id for every order."
+    columns:
+      - name: customer_key
+        description: "Surrogate key generated from customer_unique_id. Used to join this dimension to fct_order_items."
+        tests: [unique, not_null]
+      - name: customer_unique_id
+        description: "Stable identifier for a real customer, unlike customer_id which changes on every order."
+        tests: [unique, not_null]
+      - name: customer_city
+        description: "City where the customer is located, based on their most recent order."
+      - name: customer_state
+        description: "Brazilian state where the customer is located (two-letter code)."
+
+  - name: dim_seller
+    description: "One row per seller registered on the platform."
+    columns:
+      - name: seller_key
+        description: "Surrogate key generated from seller_id. Used to join this dimension to fct_order_items."
+        tests: [unique, not_null]
+      - name: seller_id
+        description: "Unique identifier for a seller."
+        tests: [unique, not_null]
+      - name: seller_city
+        description: "City where the seller is located."
+      - name: seller_state
+        description: "Brazilian state where the seller is located (two-letter code)."
+
+  - name: dim_product
+    description: "One row per product, including its category translated to English."
+    columns:
+      - name: product_key
+        description: "Surrogate key generated from product_id. Used to join this dimension to fct_order_items."
+        tests: [unique, not_null]
+      - name: product_id
+        description: "Unique identifier for a product."
+        tests: [unique, not_null]
+      - name: product_category_name_english
+        description: "Product category name, translated from Portuguese to English."
+
+  - name: dim_payment_type
+    description: "List of distinct payment types used on the platform (credit card, boleto, voucher, etc.)."
+    columns:
+      - name: payment_type_key
+        description: "Surrogate key generated from payment_type."
+        tests: [unique, not_null]
+      - name: payment_type
+        description: "Raw payment method label, as recorded by Olist."
+
+  - name: fct_order_items
+    description: "One row per ordered item. Central fact table joining order, customer, seller, product, payment, and review information."
+    columns:
+      - name: order_id
+        description: "Identifier of the order this item belongs to."
+        tests: [not_null]
+      - name: order_item_id
+        description: "Sequential number of the item within its order."
+      - name: customer_key
+        description: "Foreign key to dim_customer."
+        tests: [not_null]
+      - name: seller_key
+        description: "Foreign key to dim_seller."
+        tests: [not_null]
+      - name: product_key
+        description: "Foreign key to dim_product."
+      - name: payment_type_key
+        description: "Foreign key to dim_payment_type, based on the order's primary payment method."
+      - name: order_purchase_date
+        description: "Date the order was placed. Used as the partition column for this table."
+      - name: delivery_days
+        description: "Number of days between purchase and actual delivery to the customer."
+      - name: delay_vs_estimate_days
+        description: "Difference in days between actual delivery and the estimated delivery date. Positive means late, negative or zero means on time or early."
+      - name: price
+        description: "Price of the item, excluding freight."
+      - name: freight_value
+        description: "Shipping cost for this item."
+      - name: item_total_value
+        description: "Price plus freight for this item."
+      - name: order_total_payment_value
+        description: "Total amount paid for the entire order, summed across all payment lines."
+      - name: order_max_installments
+        description: "Highest number of installments used to pay for this order."
+      - name: review_score
+        description: "Customer review score for the order, from 1 to 5. Same review applies to every item in the order."
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              min_value: 1
+              max_value: 5
