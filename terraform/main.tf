@@ -21,6 +21,11 @@ resource "google_bigquery_dataset" "marts" {
   location   = "us-central1"
 }
 
+resource "google_bigquery_dataset" "sandbox" {
+  dataset_id = "sandbox"
+  location = "us-central1"
+}
+
 resource "google_service_account" "dbt_runner" {
   account_id   = "dbt-runner"
   display_name = "Service account used by dbt"
