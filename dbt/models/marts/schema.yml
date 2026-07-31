@@ -192,3 +192,17 @@ models:
         description: "Average customer review score for orders including items from this category."
       - name: month_start
         description: "First day of the month containing the order purchase date. Enables trend analysis over time; can be further aggregated to quarter or year in the BI layer."
+
+  - name: mart_customer_value
+    description: "Lifetime value and purchase behavior per unique customer."
+    columns:
+      - name: customer_unique_id
+        description: "Stable customer identifier. Grain of this table."
+        tests: [unique, not_null]
+      - name: lifetime_value
+        description: "Total amount spent by this customer across all orders."
+        tests: [not_null]
+      - name: is_repeat_customer
+        description: "True if the customer has placed more than one order. Given the near 1:1 customer-to-order ratio on this dataset, expect this to be true for a small minority of rows."
+      - name: acquisition_month
+        description: "First day of the month of the customer's first purchase. Enables cohort-style analysis of customer value by acquisition period."
