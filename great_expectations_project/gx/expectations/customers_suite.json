@@ -1,0 +1,28 @@
+{
+  "expectations": [
+    {
+      "id": "d273cf85-2992-409b-ad31-55ba3dc6b184",
+      "kwargs": {
+        "column": "customer_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "90085606-87d3-4acf-a257-5c36306f491f",
+      "kwargs": {
+        "column": "customer_unique_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    }
+  ],
+  "id": "f35a483d-b16e-4455-b929-f621197412ac",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "customers_suite",
+  "notes": null
+}

@@ -1,0 +1,38 @@
+{
+  "expectations": [
+    {
+      "id": "77a328d6-fabc-4acf-8961-117adc5831ce",
+      "kwargs": {
+        "column": "order_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "ce053771-4316-4192-8666-ca4daf731171",
+      "kwargs": {
+        "column": "product_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "ee19a689-1eef-418e-9d3f-6f7ca2273c93",
+      "kwargs": {
+        "column": "price",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    }
+  ],
+  "id": "a04237e9-2b70-4652-97c2-01b02f5f7f49",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "order_items_suite",
+  "notes": null
+}

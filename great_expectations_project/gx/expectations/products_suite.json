@@ -1,0 +1,19 @@
+{
+  "expectations": [
+    {
+      "id": "c177e47e-573b-433b-ad7c-533cbb29880b",
+      "kwargs": {
+        "column": "product_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    }
+  ],
+  "id": "1c888004-3ed5-44ca-a3e4-b6d4f1e87c98",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "products_suite",
+  "notes": null
+}
