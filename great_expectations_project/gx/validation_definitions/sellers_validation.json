@@ -1,0 +1,22 @@
+{
+  "data": {
+    "asset": {
+      "id": "cc7f6ad2-b4a3-4821-a8df-202e63ef968a",
+      "name": "sellers_asset"
+    },
+    "batch_definition": {
+      "id": "de99c015-6ff3-4cae-81a4-993a6274bb8e",
+      "name": "sellers_batch"
+    },
+    "datasource": {
+      "id": "65726d5a-2216-40d3-b296-28510a494545",
+      "name": "olist_raw_datasource"
+    }
+  },
+  "id": "b7cbd3ab-2bf2-4e50-b859-d5f09c6d3e90",
+  "name": "sellers_validation",
+  "suite": {
+    "id": "5ed6e32b-f9f4-4112-90f5-270be8800f0d",
+    "name": "sellers_suite"
+  }
+}

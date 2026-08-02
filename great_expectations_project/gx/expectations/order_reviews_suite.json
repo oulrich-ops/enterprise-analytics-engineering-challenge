@@ -1,0 +1,48 @@
+{
+  "expectations": [
+    {
+      "id": "a62bdac9-f9e9-4122-9fe7-dfcabec47af0",
+      "kwargs": {
+        "column": "review_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "16cc22a0-b536-41da-95be-1138ab56f3f8",
+      "kwargs": {
+        "column": "review_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "9de45fa7-702c-467f-91dc-84196537dbd5",
+      "kwargs": {
+        "column": "order_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "0e28647b-8217-4af9-a68b-b3398dbdcf93",
+      "kwargs": {
+        "column": "review_score",
+        "max_value": 5.0,
+        "min_value": 1.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    }
+  ],
+  "id": "6c44252f-140f-4afb-afe9-406b926cb706",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "order_reviews_suite",
+  "notes": null
+}

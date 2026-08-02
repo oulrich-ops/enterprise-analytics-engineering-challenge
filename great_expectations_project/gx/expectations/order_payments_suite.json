@@ -1,0 +1,39 @@
+{
+  "expectations": [
+    {
+      "id": "e3430f86-f139-4956-af05-1e07ccaef0d9",
+      "kwargs": {
+        "column": "order_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "dea42f7d-141c-4eaa-a451-9db7dbe1c710",
+      "kwargs": {
+        "column": "payment_value",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "3952df59-822c-4e77-9d50-3afca9861429",
+      "kwargs": {
+        "column": "payment_installments",
+        "min_value": 0.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    }
+  ],
+  "id": "617c4fa5-352d-45fc-b289-421f0e2249ab",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "order_payments_suite",
+  "notes": null
+}
