@@ -1,0 +1,41 @@
+{
+  "expectations": [
+    {
+      "id": "bf3412fb-bbe3-4881-8405-c14ab22dbac9",
+      "kwargs": {
+        "column": "geolocation_zip_code_prefix"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    },
+    {
+      "id": "0c7597c7-8933-4d16-9664-95b5f6a0504e",
+      "kwargs": {
+        "column": "geolocation_lat",
+        "max_value": 6.0,
+        "min_value": -35.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    },
+    {
+      "id": "c07798ef-ec0d-474f-b02b-05a5f7a10e8e",
+      "kwargs": {
+        "column": "geolocation_lng",
+        "max_value": -30.0,
+        "min_value": -75.0
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_between"
+    }
+  ],
+  "id": "8dd2c842-ba70-435f-98a8-9ec7d467123a",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "geolocation_suite",
+  "notes": null
+}

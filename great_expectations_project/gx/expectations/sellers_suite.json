@@ -1,0 +1,28 @@
+{
+  "expectations": [
+    {
+      "id": "9b41de6f-0aaf-487c-a708-013fa5e66fe4",
+      "kwargs": {
+        "column": "seller_id"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_be_unique"
+    },
+    {
+      "id": "052d3edc-2177-41d4-91b8-bec08f61cf02",
+      "kwargs": {
+        "column": "seller_state"
+      },
+      "meta": {},
+      "severity": "critical",
+      "type": "expect_column_values_to_not_be_null"
+    }
+  ],
+  "id": "5ed6e32b-f9f4-4112-90f5-270be8800f0d",
+  "meta": {
+    "great_expectations_version": "1.19.1"
+  },
+  "name": "sellers_suite",
+  "notes": null
+}
