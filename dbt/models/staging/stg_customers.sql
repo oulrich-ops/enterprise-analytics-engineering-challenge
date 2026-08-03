@@ -1,4 +1,4 @@
--- test ci workflow actionner
+-- test ci workflow actionner (slim ci test 2026-08-03)
 select
     customer_id,
     customer_unique_id,

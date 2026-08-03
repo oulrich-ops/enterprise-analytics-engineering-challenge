@@ -52,7 +52,7 @@ jobs:
                 type: bigquery
                 method: service-account
                 project: vital-valor-503422-i8
-                dataset: staging
+                dataset: ci_pr
                 keyfile: /tmp/gcp-key.json
                 threads: 4
                 location: us-central1
@@ -61,11 +61,13 @@ jobs:
       - name: Install dbt packages
         run: dbt deps
 
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
       - name: Download previous manifest
-        uses: google-github-actions/download-cloud-storage@v2
-        with:
-          path: state/manifest.json
-          destination: vital-valor-503422-i8-raw-data/dbt-state/manifest.json
+        run: |
+          mkdir -p state
+          gcloud storage cp gs://vital-valor-503422-i8-raw-data/dbt-state/manifest.json state/manifest.json
 
       - name: Run Slim CI
         run: dbt build --select state:modified+ --state ./state --defer --favor-state
