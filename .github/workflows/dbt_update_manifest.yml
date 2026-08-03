@@ -1,0 +1,61 @@
+name: Update dbt manifest
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'dbt/**'
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dbt
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install dbt-core dbt-bigquery
+
+      - name: Write GCP credentials
+        run: echo '${{ secrets.GCP_SA_KEY }}' > /tmp/gcp-key.json
+
+      - name: Configure dbt profile
+        run: |
+          mkdir -p ~/.dbt
+          cat > ~/.dbt/profiles.yml << EOF
+          olist_analytics:
+            target: ci
+            outputs:
+              ci:
+                type: bigquery
+                method: service-account
+                project: vital-valor-503422-i8
+                dataset: staging
+                keyfile: /tmp/gcp-key.json
+                threads: 4
+                location: us-central1
+          EOF
+
+      - name: Install dbt packages
+        run: dbt deps
+
+      - name: Generate manifest
+        run: dbt compile
+
+      - name: Upload manifest to GCS
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - uses: google-github-actions/upload-cloud-storage@v2
+        with:
+          path: dbt/target/manifest.json
+          destination: vital-valor-503422-i8-raw-data/dbt-state/
