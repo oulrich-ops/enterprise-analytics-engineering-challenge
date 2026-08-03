@@ -52,7 +52,7 @@ jobs:
                 type: bigquery
                 method: service-account
                 project: vital-valor-503422-i8
-                dataset: staging
+                dataset: ci_pr
                 keyfile: /tmp/gcp-key.json
                 threads: 4
                 location: us-central1
