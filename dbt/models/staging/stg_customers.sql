@@ -1,3 +1,4 @@
+-- test ci workflow
 select
     customer_id,
     customer_unique_id,
