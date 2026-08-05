@@ -1,49 +1,19 @@
-resource "google_storage_bucket" "raw_data" {
-  name          = "${var.project_id}-raw-data"
-  location      = "us-central1"
-  force_destroy = false
+module "storage" {
+  source = "./modules/storage"
 
-  uniform_bucket_level_access = true
+  project_id = var.project_id
+  region     = var.region
 }
 
-resource "google_bigquery_dataset" "raw" {
-  dataset_id = "raw"
-  location   = "us-central1"
+module "iam" {
+  source = "./modules/iam"
+
+  project_id = var.project_id
 }
 
-resource "google_bigquery_dataset" "staging" {
-  dataset_id = "staging"
-  location   = "us-central1"
-}
+module "metabase_db" {
+  source = "./modules/metabase_db"
 
-resource "google_bigquery_dataset" "marts" {
-  dataset_id = "marts"
-  location   = "us-central1"
-}
-
-resource "google_bigquery_dataset" "sandbox" {
-  dataset_id = "sandbox"
-  location = "us-central1"
-}
-
-resource "google_bigquery_dataset" "ci_pr" {
-  dataset_id = "ci_pr"
-  location   = "us-central1"
-}
-
-resource "google_service_account" "dbt_runner" {
-  account_id   = "dbt-runner"
-  display_name = "Service account used by dbt"
-}
-
-resource "google_project_iam_member" "dbt_runner_bigquery_data" {
-  project = var.project_id
-  role    = "roles/bigquery.dataEditor"
-  member  = "serviceAccount:${google_service_account.dbt_runner.email}"
-}
-
-resource "google_project_iam_member" "dbt_runner_bigquery_job" {
-  project = var.project_id
-  role    = "roles/bigquery.jobUser"
-  member  = "serviceAccount:${google_service_account.dbt_runner.email}"
+  region               = var.region
+  metabase_db_password = var.metabase_db_password
 }
