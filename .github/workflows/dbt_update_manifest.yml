@@ -43,6 +43,14 @@ jobs:
                 keyfile: /tmp/gcp-key.json
                 threads: 4
                 location: us-central1
+              prod:
+                type: bigquery
+                method: service-account
+                project: vital-valor-503422-i8
+                dataset: staging
+                keyfile: /tmp/gcp-key.json
+                threads: 4
+                location: us-central1
           EOF
 
       - name: Install dbt packages
@@ -51,6 +59,9 @@ jobs:
       - name: Generate manifest
         run: dbt compile
 
+      - name: Generate manifest for Metabase sync
+        run: dbt compile --target prod --target-path target_prod
+
       - name: Sync dbt docs to Metabase
         env:
           METABASE_URL: ${{ secrets.METABASE_URL }}
@@ -58,7 +69,7 @@ jobs:
         run: |
           pip install dbt-metabase
           dbt-metabase models \
-            --manifest-path target/manifest.json \
+            --manifest-path target_prod/manifest.json \
             --metabase-url "$METABASE_URL" \
             --metabase-api-key "$METABASE_API_KEY" \
             --metabase-database dwh \
