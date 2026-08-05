@@ -1,12 +1,6 @@
-variable "project_id" {
-  description = "GCP project ID"
-  type        = string
-}
-
 variable "region" {
-  description = "GCP region"
+  description = "GCP region for the Cloud SQL instance"
   type        = string
-  default     = "europe-west1"
 }
 
 variable "metabase_db_password" {
