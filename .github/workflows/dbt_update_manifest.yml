@@ -50,6 +50,19 @@ jobs:
       - name: Generate manifest
         run: dbt compile
 
+      - name: Sync dbt docs to Metabase
+        env:
+          METABASE_URL: ${{ secrets.METABASE_URL }}
+          METABASE_API_KEY: ${{ secrets.METABASE_API_KEY }}
+        run: |
+          pip install dbt-metabase
+          dbt-metabase models \
+            --manifest-path target/manifest.json \
+            --metabase-url "$METABASE_URL" \
+            --metabase-api-key "$METABASE_API_KEY" \
+            --metabase-database vital-valor-503422-i8 \
+            --include-schemas marts
+
       - name: Upload manifest to GCS
         uses: google-github-actions/auth@v2
         with:
