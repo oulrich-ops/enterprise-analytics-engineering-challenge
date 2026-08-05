@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'dbt/**'
+  workflow_dispatch:
 
 jobs:
   update-manifest:
