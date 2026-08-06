@@ -84,3 +84,10 @@ jobs:
         with:
           path: dbt/target/manifest.json
           destination: vital-valor-503422-i8-raw-data/dbt-state/
+
+      - name: Notify Slack on failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"❌ Update dbt manifest a échoué sur '"${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"'"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
