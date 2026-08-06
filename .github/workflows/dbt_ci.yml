@@ -71,3 +71,10 @@ jobs:
 
       - name: Run Slim CI
         run: dbt build --select state:modified+ --state ./state --defer --favor-state
+
+      - name: Notify Slack on failure
+        if: failure()
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"❌ Slim CI a échoué sur la PR '"${{ github.event.pull_request.html_url }}"'"}' \
+            ${{ secrets.SLACK_WEBHOOK_URL }}
