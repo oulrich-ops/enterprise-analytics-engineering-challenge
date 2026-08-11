@@ -163,6 +163,9 @@ models:
 
       - name: avg_review_score
         description: "Average customer review score (1 to 5) for orders including this seller's items."
+        
+      - name: month_start
+        description: "First day of the month of purchase. Enables tracking seller reliability trends over time; can be aggregated further in the BI layer."
       
   - name: mart_payment_analysis
     description: "Order volume and revenue broken down by payment method, at the order grain."

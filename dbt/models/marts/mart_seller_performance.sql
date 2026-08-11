@@ -7,6 +7,7 @@ seller as (
 )
 
 select
+    date_trunc(f.order_purchase_date, month) as month_start,
     s.seller_id,
     s.seller_state,
     s.seller_city,
