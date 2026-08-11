@@ -37,3 +37,6 @@ models:
     marts:
       +schema: marts
       +materialized: table
+
+vars:
+  billing_export_table: "gcp_billing_export_v1_01B462_209C65_9D0A12"
