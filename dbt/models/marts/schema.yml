@@ -127,11 +127,16 @@ models:
         description: "Average order value for the day, calculated as total revenue divided by the number of distinct orders."
 
   - name: mart_seller_performance
-    description: "Delivery reliability, sales volume, and customer satisfaction per seller."
+    description: "Delivery reliability, sales volume, and customer satisfaction per seller, by month."
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - month_start
+            - seller_id
     columns:
       - name: seller_id
-        description: "Unique identifier for the seller. Grain of this table."
-        tests: [unique, not_null]
+        description: "Unique identifier for the seller. Combined with month_start, forms the grain of this table."
+        tests: [not_null]
 
       - name: seller_state
         description: "Brazilian state where the seller is located (two-letter code)."
@@ -163,6 +168,9 @@ models:
 
       - name: avg_review_score
         description: "Average customer review score (1 to 5) for orders including this seller's items."
+        
+      - name: month_start
+        description: "First day of the month of purchase. Enables tracking seller reliability trends over time; can be aggregated further in the BI layer."
       
   - name: mart_payment_analysis
     description: "Order volume and revenue broken down by payment method, at the order grain."
