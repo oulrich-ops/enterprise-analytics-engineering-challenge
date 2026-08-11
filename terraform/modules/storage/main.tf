@@ -30,3 +30,8 @@ resource "google_bigquery_dataset" "ci_pr" {
   dataset_id = "ci_pr"
   location   = var.region
 }
+
+resource "google_bigquery_dataset" "billing_export" {
+  dataset_id = "billing_export"
+  location   = var.region
+}
