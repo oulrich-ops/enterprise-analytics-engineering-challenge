@@ -29,4 +29,4 @@ select
 from fact f
 inner join seller s on s.seller_key = f.seller_key
 left join {{ ref('br_states') }} b on b.state_code = s.seller_state
-group by month_start, s.seller_id, s.seller_state, s.seller_city,s.seller_state_name
+group by month_start, s.seller_id, s.seller_state, s.seller_city,b.state_name
