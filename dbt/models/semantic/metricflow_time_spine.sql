@@ -9,7 +9,7 @@ with spine as (
         dbt.date_spine(
             'day',
             "cast('2016-01-01' as date)",
-            "cast(date_add(day, 1, current_date) as date)"
+            "cast(" ~ dbt.dateadd('day', 1, 'current_date') ~ " as date)"
         )
     }}
 )
