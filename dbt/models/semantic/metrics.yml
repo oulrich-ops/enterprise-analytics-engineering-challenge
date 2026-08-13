@@ -1,0 +1,24 @@
+metrics:
+  - name: total_revenue
+    label: "Total Revenue"
+    description: "Total revenue across all order items"
+    type: simple
+    type_params:
+      measure: revenue
+
+  - name: total_orders
+    label: "Total Orders"
+    description: "Total number of distinct orders"
+    type: simple
+    type_params:
+      measure: order_count
+
+  - name: average_order_value
+    label: "Average Order Value"
+    description: "Revenue divided by number of orders"
+    type: derived
+    type_params:
+      expr: total_revenue / total_orders
+      metrics:
+        - total_revenue
+        - total_orders
