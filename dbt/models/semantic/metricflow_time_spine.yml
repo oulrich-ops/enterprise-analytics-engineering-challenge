@@ -1,0 +1,9 @@
+models:
+  - name: metricflow_time_spine
+    description: "Daily calendar spine required by MetricFlow for time-based metric calculations (e.g. cumulative or gap-filled metrics)."
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        description: "Calendar day."
+        granularity: day

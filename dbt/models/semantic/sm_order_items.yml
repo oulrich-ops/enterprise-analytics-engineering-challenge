@@ -1,0 +1,30 @@
+semantic_models:
+  - name: sm_order_items
+    model: ref('fct_order_items')
+    defaults:
+      agg_time_dimension: order_purchase_date
+
+    entities:
+      - name: order_item
+        type: primary
+        expr: concat(order_id, '-', order_item_id)
+      - name: customer
+        type: foreign
+        expr: customer_key
+      - name: seller
+        type: foreign
+        expr: seller_key
+
+    dimensions:
+      - name: order_purchase_date
+        type: time
+        type_params:
+          time_granularity: day
+
+    measures:
+      - name: revenue
+        agg: sum
+        expr: item_total_value
+      - name: order_count
+        agg: count_distinct
+        expr: order_id
