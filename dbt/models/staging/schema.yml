@@ -32,9 +32,9 @@ models:
     columns:
       - name: review_id
         tests: [not_null]
-
-  - name: review_score
-    tests:
-      - dbt_expectations.expect_column_values_to_be_between:
-          min_value: 1
-          max_value: 5
+      - name: review_score
+        tests:
+          - dbt_expectations.expect_column_values_to_be_between:
+              arguments:
+                min_value: 1
+                max_value: 5

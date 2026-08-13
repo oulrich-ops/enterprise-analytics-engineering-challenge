@@ -88,8 +88,9 @@ models:
         description: "Customer review score for the order, from 1 to 5. Same review applies to every item in the order."
         tests:
           - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 1
-              max_value: 5
+              arguments:
+                min_value: 1
+                max_value: 5
 
   - name: mart_sales_summary
     description: "Daily revenue and order volume. Aggregatable to week, month, or quarter using the corresponding start-date column."
@@ -130,9 +131,10 @@ models:
     description: "Delivery reliability, sales volume, and customer satisfaction per seller, by month."
     tests:
       - dbt_utils.unique_combination_of_columns:
-          combination_of_columns:
-            - month_start
-            - seller_id
+          arguments:
+            combination_of_columns:
+              - month_start
+              - seller_id
     columns:
       - name: seller_id
         description: "Unique identifier for the seller. Combined with month_start, forms the grain of this table."
@@ -143,6 +145,9 @@ models:
 
       - name: seller_city
         description: "City where the seller is located."
+
+      - name: seller_state_name
+        description: "Full name of the Brazilian state where the seller is located."
 
       - name: nb_orders
         description: "Number of distinct orders that included at least one item from this seller."
@@ -163,8 +168,9 @@ models:
         description: "Share of this seller's items delivered after the estimated delivery date, expressed as a percentage."
         tests:
           - dbt_expectations.expect_column_values_to_be_between:
-              min_value: 0
-              max_value: 100
+              arguments:
+                min_value: 0
+                max_value: 100
 
       - name: avg_review_score
         description: "Average customer review score (1 to 5) for orders including this seller's items."
