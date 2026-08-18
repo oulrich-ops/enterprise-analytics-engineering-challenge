@@ -16,5 +16,6 @@ terraform/*.tfstate.backup
 terraform/terraform.tfstate.*.backup
 terraform/.terraform.lock.hcl
 *.tfvars
+*-key.json
 
 great_expectations_project/gx/uncommitted/
