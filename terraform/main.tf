@@ -27,8 +27,12 @@ module "cloud_sql" {
 module "cloud_run" {
   source = "./modules/cloud_run"
 
-  region                = var.region
-  service_account_email = module.iam.metabase_runner_email
+  region = var.region
+  # The service currently runs under the project's default compute service
+  # account (it was originally deployed via `gcloud run deploy` without
+  # --service-account). module.iam.metabase_runner_email exists and is
+  # granted BigQuery roles, but isn't actually wired up here yet.
+  service_account_email = "780659895934-compute@developer.gserviceaccount.com"
   db_host               = module.cloud_sql.public_ip_address
   db_password           = var.metabase_db_password
 }

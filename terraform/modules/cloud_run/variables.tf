@@ -11,7 +11,7 @@ variable "service_account_email" {
 variable "metabase_image" {
   description = "Metabase container image"
   type        = string
-  default     = "metabase/metabase:v0.50.20"
+  default     = "metabase/metabase:latest"
 }
 
 variable "db_host" {
