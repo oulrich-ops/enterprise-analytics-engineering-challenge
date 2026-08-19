@@ -53,3 +53,16 @@ resource "google_project_iam_member" "openmetadata_storage_viewer" {
   member  = "serviceAccount:${google_service_account.openmetadata_runner.email}"
 }
 
+# The raw-data bucket is managed in terraform/environments/prod (a separate
+# Terraform root/state), so it's looked up here rather than referenced
+# directly as a resource.
+data "google_storage_bucket" "raw_data" {
+  name = "${var.project_id}-raw-data"
+}
+
+resource "google_storage_bucket_iam_member" "openmetadata_bucket_admin" {
+  bucket = data.google_storage_bucket.raw_data.name
+  role   = "roles/storage.admin"
+  member = "serviceAccount:${google_service_account.openmetadata_runner.email}"
+}
+
