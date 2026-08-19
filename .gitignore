@@ -9,12 +9,12 @@ dbt/dbt_packages/
 dbt/logs/
 .dbt/
 
-# Terraform
-terraform/.terraform/
-terraform/*.tfstate
-terraform/*.tfstate.backup
-terraform/terraform.tfstate.*.backup
-terraform/.terraform.lock.hcl
+# Terraform (applies to every Terraform root, not just terraform/)
+.terraform/
+*.tfstate
+*.tfstate.backup
+terraform.tfstate.*.backup
+.terraform.lock.hcl
 *.tfvars
 *-key.json
 

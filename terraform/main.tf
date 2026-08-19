@@ -5,15 +5,30 @@ module "storage" {
   region     = var.region
 }
 
+module "bigquery" {
+  source = "./modules/bigquery"
+
+  region = var.region
+}
+
 module "iam" {
   source = "./modules/iam"
 
   project_id = var.project_id
 }
 
-module "metabase_db" {
-  source = "./modules/metabase_db"
+module "cloud_sql" {
+  source = "./modules/cloud_sql"
 
   region               = var.region
   metabase_db_password = var.metabase_db_password
+}
+
+module "cloud_run" {
+  source = "./modules/cloud_run"
+
+  region                = var.region
+  service_account_email = "780659895934-compute@developer.gserviceaccount.com"
+  db_host               = module.cloud_sql.public_ip_address
+  db_password           = var.metabase_db_password
 }
