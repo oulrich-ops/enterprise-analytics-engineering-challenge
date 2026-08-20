@@ -120,6 +120,12 @@ Architecture en couches, convention standard dbt :
   <img src="docs/screenshots/ge-order-reviews-validation.png" alt="Résultat de validation Great Expectations pour order_reviews_suite" width="48%">
 </p>
 
+Le lineage complet de `fct_order_items` (sources raw, modèles de staging, dimensions et marts consommateurs) est visible dans OpenMetadata :
+
+<p align="center">
+  <img src="docs/screenshots/fact_lineage_from_openmetada.png" alt="Lineage de fct_order_items dans OpenMetadata" width="90%">
+</p>
+
 ## CI/CD
 
 Deux workflows GitHub Actions :
@@ -149,6 +155,9 @@ Chacun avec un filtre de période interactif. Metabase est déployé sur Cloud R
 </p>
 <p align="center">
   <img src="docs/screenshots/dashboard-top-flop-vendeurs.png" alt="Dashboard Metabase, top et flop des vendeurs" width="90%">
+</p>
+<p align="center">
+  <img src="docs/screenshots/paiement-categorie-produit.png" alt="Dashboard Metabase, paiement et catégorie produit" width="90%">
 </p>
 
 ## Coûts
