@@ -66,36 +66,6 @@ CSV bruts → Cloud Storage → BigQuery (raw) → dbt (staging → marts) → M
 - **Catalogue de données** : OpenMetadata (Docker), synchronisé avec dbt et BigQuery
 - **Observabilité** : suivi des coûts GCP via export de facturation, alerting Slack
 
-## Structure du projet
-
-```
-enterprise-analytics-engineering-challenge/
-├── .github/
-│   └── workflows/            # Slim CI, sauvegarde du manifest dbt
-├── terraform/
-│   ├── environments/
-│   │   └── prod/              # composition des modules
-│   └── modules/
-│       ├── bigquery/
-│       ├── storage/
-│       ├── iam/
-│       ├── cloud_run/         # déploiement Metabase
-│       └── cloud_sql/         # base de persistance Metabase
-├── dbt/
-│   ├── models/
-│   │   ├── staging/            # stg_* : nettoyage, typage
-│   │   ├── marts/              # dim_*, fct_*, mart_*
-│   │   └── semantic/           # POC MetricFlow
-│   ├── seeds/
-│   ├── macros/                 # generate_schema_name_for_env
-│   └── dbt_project.yml
-├── ingestion/                  # scripts de chargement CSV → Cloud Storage → BigQuery
-├── great_expectations_project/ # validation des données brutes
-├── openmetadata/                # déploiement du catalogue de données
-├── docs/
-│   └── SETUP.md
-└── README.md
-```
 
 ## Modélisation des données
 
